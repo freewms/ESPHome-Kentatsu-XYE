@@ -138,12 +138,11 @@ void ClimateMideaXYE::sendRecv(uint8_t cmdSent) {
     uint8_t temp_byte;
     while (this->uart_->available()) {
       if (i < RX_MESSAGE_LENGTH) {
-          this->uart_->read_byte(&rx_data.raw[i]);
-        } else {
-        // Если получили больше 32 байт - читаем и отбрасываем
-          this->uart_->read_byte(&temp_byte);
-          ESP_LOGV(Constants::TAG, "Dropping extra byte: 0x%02X", temp_byte);
-        }
+        this->uart_->read_byte(&rx_data.raw[i]);
+      } else {
+        this->uart_->read_byte(&temp_byte);
+        ESP_LOGV(Constants::TAG, "Dropping extra byte: 0x%02X", temp_byte);
+      }
       i++;
     }
    
