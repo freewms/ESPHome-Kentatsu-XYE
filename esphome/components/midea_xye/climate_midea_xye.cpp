@@ -136,7 +136,7 @@ void ClimateMideaXYE::sendRecv(uint8_t cmdSent) {
 
     uint8_t i = 0;
     while (this->uart_->available()) {
-      if (i < RX_MESSAGE_LENGTH)
+      if (i < RX_MESSAGE_LENGTH) {
         this->uart_->read_byte(&rx_data.raw[i]);
         i++;
       } else
