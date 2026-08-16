@@ -139,14 +139,14 @@ void ClimateMideaXYE::sendRecv(uint8_t cmdSent) {
     while (this->uart_->available()) {
       if (i < RX_MESSAGE_LENGTH) {
         this->uart_->read_byte(&rx_data.raw[i]);
+        i++;
       } else {
         this->uart_->read_byte(&temp_byte);
         ESP_LOGV(Constants::TAG, "Dropping extra byte: 0x%02X", temp_byte);
       }
-      i++;
     }
    
-    if (i >= RX_MESSAGE_LENGTH) {
+    if (i == RX_MESSAGE_LENGTH) {
       // The configured address answered: the bus is responsive, clear the miss
       // counter so a transient gap never accumulates toward a needless sweep.
       this->miss_count_ = 0;
