@@ -140,10 +140,7 @@ void ClimateMideaXYE::sendRecv(uint8_t cmdSent) {
         this->uart_->read_byte(&rx_data.raw[i]);
       i++;
     }
-    
-    if (i > RX_MESSAGE_LENGTH)
-      i = RX_MESSAGE_LENGTH;
-    
+   
     if (i == RX_MESSAGE_LENGTH) {
       // The configured address answered: the bus is responsive, clear the miss
       // counter so a transient gap never accumulates toward a needless sweep.
